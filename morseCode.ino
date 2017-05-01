@@ -50,20 +50,22 @@ struct entry w = {{dot, dash, dash, blank, blank, blank, blank, blank}, 'w'};
 struct entry x = {{dash, dot, dot, dash, blank, blank, blank, blank}, 'x'};
 struct entry y = {{dash, dot, dash, dash, blank, blank, blank, blank}, 'y'};
 struct entry z = {{dash, dash, dot, dot, blank, blank, blank, blank}, 'z'};
+
 const int dict_size = 26;
 struct entry symbol_dictionary[dict_size] = {
-  a, b, c, d, e, f
+  a, b, c, d, e, f, g, h, i , j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 };
-//booleans
+
+// booleans
 bool button_unpressed = false; // was the button just unpressed?
 bool space_printed = true; // was a space the last thing printed?
 bool char_printed = true; // was the current character printed?
 
-//times
+// times
 unsigned int time_released; // when the button was last released
 unsigned int time_started = 0; // when the current press began
 
-//pin constants
+// pin constants
 const int button_pin = 2;
 
 bool matching_char(char* char_buff, struct entry ent, int buff_size) {
@@ -102,7 +104,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(button_pin) == LOW) { // button pressed
+  if (digitalRead(button_pin) == LOW) { // button currently pressed
     if (time_started == 0) { // button just pressed
       time_started = millis();
     }
@@ -118,14 +120,14 @@ void loop() {
       curr_char[char_index] = dash;
       char_index = (char_index + 1) % buff_size;
     }
-    else if (press_len > dot_l) {
+    else if (press_len > dot_l) { // dot
       curr_char [char_index]= dot;
       char_index= (char_index + 1) % buff_size;
     }
   }
   else { // button has been release at least one loop iteration
     int diff = millis() - time_released;
-    if (diff > word_delay_l && !space_printed) { //space
+    if (diff > word_delay_l && !space_printed) { // space
      space_printed = true;
      Serial.print(" ");
      char_index = 0;
