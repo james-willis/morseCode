@@ -138,7 +138,7 @@ void loop() {
      if (new_letter != 0) {
       Serial.print(new_letter);
      }
-     char_index= 0;
+     char_index = 0;
     }
   }
 }
